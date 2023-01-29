@@ -15,10 +15,13 @@ import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function save() {
+export default function save( { attributes } ) {
+	const { columnCount } = attributes;
+  	const columnStyles = { columnCount}
+
 	return (
-		<div { ...useBlockProps.save() } >
-			<InnerBlocks.Content />
+		<div { ...useBlockProps.save( { style: columnStyles } ) } >
+			
 		</div>
 	);
 }

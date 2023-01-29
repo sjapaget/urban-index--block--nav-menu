@@ -8,13 +8,30 @@
 	"icon": "menu",
 	"description": "Navigation Menu for urban-index.fr",
 	"supports": {
-		"html": false
+		"html": true,
+		"color": {},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
 	},
 	"textdomain": "ui-nav-menu",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"attributes": {
-		
+		"style": {
+			"type": "object",
+			"default": {
+				"color": {
+					"text": "var( --wp--preset--color--main )",
+					"background": "var( --wp--preset--color--background )"
+				}
+			}
+		},
+		"ColumnCount": {
+			"type": "integer",
+			"default": 8
+		}
 	}
 }

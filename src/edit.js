@@ -13,8 +13,13 @@ import { __ } from '@wordpress/i18n';
  */
 import { 
 	useBlockProps,
-	InnerBlocks
+	InspectorControls
  } from '@wordpress/block-editor';
+
+ import { 
+	RangeControl,
+	PanelBody 
+} from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -32,12 +37,31 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
-	const ALLOWED_BLOCKS = [ 'core/navigation-link', 'core/navigation-submenu', 'core/columns', 'core/column' ]
+export default function Edit( { attributes, setAttributes } ) {
+	const { columnCount } = attributes;
+	const columnStyles = { columnCount };
+
+	const onChangeColumnCount = ( val ) => {
+		setAttributes( { columnCount: val } );
+	};
 
 	return (
-		<div { ...useBlockProps()}>
-			<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
-		</div>
+		<>
+			<PanelBody>
+				<InspectorControls>
+					<RangeControl 
+						label="Columns"
+						value={ columnCount }
+						onChange={ onChangeColumnCount }
+						min={ 1 }
+						max={ 10 }
+					/>
+				</InspectorControls>
+			</PanelBody>
+
+			<div { ...useBlockProps( { style: columnStyles } )}>
+				
+			</div>
+		</>
 	);
 }

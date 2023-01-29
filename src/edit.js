@@ -11,7 +11,10 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { 
+	useBlockProps,
+	InnerBlocks
+ } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -30,12 +33,11 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 export default function Edit() {
+	const ALLOWED_BLOCKS = [ 'core/navigation-link', 'core/navigation-submenu', 'core/columns', 'core/column' ]
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Urban Index Nav Menu – hello from the editor!',
-				'ui-nav-menu'
-			) }
-		</p>
+		<div { ...useBlockProps()}>
+			<InnerBlocks allowedBlocks={ ALLOWED_BLOCKS } />
+		</div>
 	);
 }
